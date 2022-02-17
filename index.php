@@ -23,3 +23,10 @@ $req = $db->query('SELECT name FROM waiter')->fetchAll();
 foreach ($req as $dbreq) {
   echo $dbreq['name'] . "<br>";
 }
+
+$req = $db->query('SELECT * FROM edible')->fetchAll();
+
+foreach ($req as $dbreq) {
+  echo $dbreq['name'] . " ";
+  echo $dbreq['price'] . "euros <br>" ;
+}
