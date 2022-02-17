@@ -27,6 +27,7 @@ foreach ($req as $dbreq) {
 $req = $db->query('SELECT * FROM edible')->fetchAll();
 
 foreach ($req as $dbreq) {
-  echo $dbreq['name'] . " ";
-  echo $dbreq['price'] . "euros <br>" ;
+  echo $dbreq['name'] ." ". $dbreq['price'] ."€ <br>";
 }
+
+?>
