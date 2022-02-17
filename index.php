@@ -1,23 +1,24 @@
 <?php
 
-require_once "req.php";
+require('vendor/autoload.php');
 
+$dotenv = \Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv->load();
 
-$bdd = bdd();
+function dbaccess() {
+  $dbConnection = "mysql:dbname=". $_ENV['DB_NAME'] ."; host=". $_ENV['DB_HOST'] .":". $_ENV['DB_PORT'] ."; charset=utf8";
+  $user = $_ENV['DB_USERNAME'];
+  $pwd = $_ENV['DB_PASSWORD'];
+  
+  $db = new PDO ($dbConnection, $user, $pwd, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
 
-// $waiters = $bdd->query('SELECT * FROM waiter');
+  return $db;
+}
+  
+$db = dbaccess();
 
-// echo ("Hello World");
+$req = $db->query('SELECT name FROM waiter')->fetchAll();
 
-// echo ("Le petit Chat Par d'heure");
-
-
-// foreach($waiters as $waiter){
-//     echo "</br>";
-//     echo $waiter['name'];
-//  }
-
-
-// ?>
-
-<?php var_dump($bdd) ?>
+foreach ($req as $dbreq) {
+  echo $dbreq['name'] . "<br>";
+}
